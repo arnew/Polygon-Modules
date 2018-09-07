@@ -38,7 +38,7 @@ module new_border(side_length,sides, radius, width, height, chamfer, thickness) 
     }
 }
 
-module new_snaps(side_length,sides, width, height, radius,bore, radius, snaplen, snaps, snap_trim, border_snap, thickness) {
+module new_snaps(side_length,sides, width, height, radius,bore, radius, snaplen, snaps, snap_trim, border_snap, thickness, bore_trim) {
     
 $fn=20;
     difference() {
@@ -64,7 +64,7 @@ translate([-radius*cos(180/sides),0,0])
 
     union() {
         // bores
-      translate([width/2,side_length/2,0]) rotate([90,0,0]) cylinder(r=bore/2, h=side_length);
+  #    translate([width/2-bore_trim/2,side_length/2,0]) rotate([90,0,0]) cylinder(r=bore/2, h=side_length);
             // snap spaces
             for(i=[(border_snap?0:1):snaps-1])
                 translate([0,snaplen*(i-snaps/2)+snap_trim,-height/2])
