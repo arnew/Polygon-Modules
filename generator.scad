@@ -1,11 +1,11 @@
 use <polygon-module.scad>
 /*
-sides = 3;
-snaps = 5;
-pattern = ":)";
-side_length = 60;
-level = 4;
-*/
+   sides = 3;
+   snaps = 5;
+   pattern = ":)";
+   side_length = 60;
+   level = 4;
+ */
 echo(sides);
 echo (snaps);
 echo(pattern);
