@@ -6,11 +6,11 @@ use <smiley_fill.scad>
 use <spacetree_fill.scad>
 
 
-sides = 3;
-snaps = 7;
+sides = 6;
+snaps = 3;
 level = 4;
 pattern =0; // [0: Sierpinski/Megnerlike/n-Flakes, 1: Space Tree, 2: RRT] or smileys
-side_length = 80; 
+side_length = 40; 
 
 // Set the thickness of the tile, in mm
 thickness = 3;
@@ -29,6 +29,7 @@ $continuity = 0.8;
 bore = 1.70 ;
 border_snap = false;
 hanger_width = 4;
+hanger=false;
 //for(sides = [3:6])      translate([100*sides, 0,0])
 //for(pattern = [0:2])         translate([0,100*pattern,0])
             mod(sides, snaps, pattern, side_length,level);
@@ -47,6 +48,9 @@ snaplen = side_length/snaps;
 
 difference() {
     union(){
+        
+new_fill_maker(pattern, level, sides, inside);
+        if(hanger) union() {
  translate([0,0,-thickness/2]) linear_extrude(thickness) scale(0.5*inside) rotate([0,0,180])
 triangle();
 for(i = [0:2])
@@ -54,8 +58,9 @@ for(i = [0:2])
 translate([-inside/2,0,-thickness/2])
 cylinder(r=thickness/2, h=thickness,$fn=10);
 
-new_fill_maker(pattern, level, sides, inside);
 }
+}
+if(hanger) 
 translate([0,0,-thickness])cylinder(r=inside/4-hanger_width,h=thickness*2);
 }
 
